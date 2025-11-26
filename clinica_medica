@@ -1,0 +1,37 @@
+CREATE DATABASE clinica_medica;
+
+CREATE TABLE MEDICO(
+crm INT PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL,
+telefone INT UNIQUE,
+especialidade VARCHAR(50) CHECK (especialidade in ('Cardiologista', 'Nutricionista'))
+    );
+
+CREATE TABLE PACIENTE(
+identidade INT PRIMARY KEY,
+nome VARCHAR(100) NOT NULL,
+endereço VARCHAR(100) NOT NULL,
+telefone int UNIQUE,
+tipo_exame VARCHAR(50) CHECK (tipo_exame in ('Cardiologia', 'Nutrição'))
+);
+
+CREATE TABLE CONSULTA(
+num_consulta VARCHAR(50) PRIMARY KEY,
+nome_paciente VARCHAR(100) NOT NULL,
+ident_paciente INT NOT NULL,
+nome_medico VARCHAR(100) NOT NULL,
+tipo_exame VARCHAR(50) UNIQUE,
+foreign key(ident_paciente)
+	references PACIENTE(identidade)
+    );
+    
+CREATE TABLE EXAME(
+codigo_exame VARCHAR(50) PRIMARY KEY,
+nome_exame VARCHAR(50) NOT NULL,
+nome_paciente VARCHAR(100) NOT NULL,
+crm_medico INT NOT NULL,
+data_exame DATE UNIQUE,
+foreign key(crm_medico)
+	references MEDICO(crm)
+);
