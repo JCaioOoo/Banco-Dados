@@ -1,0 +1,39 @@
+CREATE DATABASE SYS_VENDAS;
+
+CREATE TABLE CLIENTE(
+	id_clinte INT,
+    nome VARCHAR(100),
+    email VARCHAR(100), /*Coluna modificada na linha 17-18 de 75>100*/
+    data_nascimento DATE,
+    ativo BOOLEAN,
+    telefone VARCHAR(20) /*Coluna adicionada pelo cmd na linha 13-14*/
+);
+
+/*Adicionar coluna na tabela, no caso, adicionou coluna TELEFONE na tabela CLIENTE*/
+ALTER TABLE CLIENTE
+ADD COLUMN telefone VARCHAR(20);
+
+/*Modificar coluna EMAIL, adicionando mais quantidade de VARCHAR 75>100*/
+ALTER TABLE CLIENTE
+MODIFY COLUMN email VARCHAR (100);
+
+/*Deletar tabela permanentemente*/
+ALTER TABLE CLIENTE
+DROP COLUMN ativo;
+
+CREATE TABLE PRODUTOS(
+	id INT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL(10,2) CHECK (preco > 0),
+    codigo_barras VARCHAR(13) UNIQUE,
+    estoque INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE PEDIDOS(
+	id INT PRIMARY KEY,
+    produto_id INT NOT NULL,
+    quantidade INT CHECK (quantidade > 0),
+    data_pedido DATE NOT NULL,
+    FOREIGN KEY (produto_id)
+		references PRODUTOS(id)
+);
