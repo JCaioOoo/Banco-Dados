@@ -1,0 +1,71 @@
+/*Cria o Banco de Dados*/
+CREATE DATABASE db_escola;
+
+/*Usa o Banco de Dados*/
+USE db_escola;
+
+/*Cria tabela para os Alunos*/
+CREATE TABLE ALUNOS(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(70),
+    idade INT,
+    serie VARCHAR(10)
+);
+
+/*Adiciona Registros/Informações na tabela Alunos*/
+INSERT INTO ALUNOS
+(nome, idade, serie)
+VALUES
+('Mario Silva', 14, '6° série'),
+('Gabriela Flores', 17, '8° série'),
+('Alfredo Golf', 15, '7° série'),
+('Alex Ferreira', 15, '6° série'),
+('Francisca Almeida', 17, '9° série');
+
+/*Seleciona TODOS os Alunos*/
+SELECT * FROM ALUNOS;
+
+/*Seleciona nome e idade dos Alunos organizando as idades em ordem crescente*/
+SELECT nome, idade FROM ALUNOS
+ORDER BY idade ASC;
+
+/*Selecione nome e serie dos Alunos*/
+SELECT nome, serie FROM ALUNOS
+WHERE serie = '8° série';
+
+/*Atualiza nos Alunos a idade para 18 onde o id for 2*/
+UPDATE ALUNOS SET idade = 18
+WHERE id = 2;
+
+/*Exclua dos Alunos onde o id for 5*/
+DELETE FROM ALUNOS
+WHERE id = 5;
+
+/*Cria a tabela para os Professores*/
+CREATE TABLE PROFESSORES(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(50),
+    email VARCHAR(50),
+    materia VARCHAR(50) CHECK (materia in('Matematica', 'Portugues', 'Ciencias'))
+);
+
+/*Insira Registros/Informações para os Professores*/
+INSERT INTO PROFESSORES
+(nome, email, materia)
+VALUES
+('Rodolfo Morais', 'rodolfo@gmail.com', 'Matematica'),
+('Severina Ramalho', 'severina@gmail.com', 'Ciencias'),
+('Gustavo Primo', 'gustavo@gmail.com', 'Portugues');
+
+/*Seleciona TODOS os Professores*/
+SELECT * FROM PROFESSORES;
+
+/*Seleciona nome e serie dos Alunos, nome e materia dos Professores
+E em seguida, mostrando tudo em uma tabela só*/
+SELECT ALUNOS.nome AS alunos,
+ALUNOS.serie,
+PROFESSORES.nome AS professor,
+PROFESSORES.materia
+FROM ALUNOS
+INNER JOIN PROFESSORES
+ON ALUNOS.id = PROFESSORES.id;
