@@ -30,7 +30,7 @@ INSERT INTO ALUNOS
 (nome, idade, cidade)
 VALUES
 ('Maria Silva', 20, 'São Paulo'),
-('Maria Silva', 20, 'São Paulo'),
+('João Santos', 22, 'Rio de Janeiro'),
 ('Ana Souza', 19, 'Belo Horizonte'),
 ('Carlos Pereira', 25, 'Curitiba');
 
@@ -48,3 +48,37 @@ VALUES
 (2, 2, '2024-03-10'),
 (3, 1, '2024-04-05'),
 (4, 3, '2024-05-20');
+
+SELECT nome, cidade
+FROM ALUNOS;
+
+SELECT nome_curso, carga_horaria
+FROM CURSOS
+WHERE carga_horaria >= 50;
+
+SELECT nome, cidade
+FROM ALUNOS
+WHERE cidade = 'Curitiba';
+
+SELECT nome, idade
+FROM ALUNOS
+WHERE idade <= 22;
+
+SELECT ALUNOS.nome, CURSOS.nome_curso
+FROM ALUNOS
+INNER JOIN CURSOS
+ON ALUNOS.id = CURSOS.id;
+
+SELECT nome, nome_curso	
+FROM ALUNOS
+INNER JOIN CURSOS
+ON ALUNOS.id = CURSOS.id
+WHERE nome_curso = 'Banco de Dados';
+
+SELECT nome_curso, carga_horaria
+FROM CURSOS
+WHERE carga_horaria ;
+
+SELECT nome, cidade
+FROM ALUNOS
+WHERE cidade = 'São Paulo' OR cidade = 'Rio de Janeiro';
