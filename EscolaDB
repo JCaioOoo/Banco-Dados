@@ -1,7 +1,10 @@
+/*Cria Banco de Dados*/
 CREATE DATABASE EscolaDB;
 
+/*Usa o Banco de Dados*/
 USE EscolaDB;
 
+/*Cria tabela para os Alunos*/
 CREATE TABLE ALUNOS(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(50),
@@ -9,12 +12,14 @@ CREATE TABLE ALUNOS(
     cidade VARCHAR(50)
 );
 
+/*Cria tabela para os Cursos*/
 CREATE TABLE CURSOS(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     nome_curso VARCHAR(50),
     carga_horaria INT
 );
 
+/*Cria tabela para as Matriculas*/
 CREATE TABLE MATRICULA(
 	id INT AUTO_INCREMENT PRIMARY KEY,
     aluno_id INT,
@@ -26,6 +31,7 @@ CREATE TABLE MATRICULA(
     references CURSOS(id)
 );
 
+/*Insere informações/Registros para a tabela Aluno*/
 INSERT INTO ALUNOS
 (nome, idade, cidade)
 VALUES
@@ -34,6 +40,7 @@ VALUES
 ('Ana Souza', 19, 'Belo Horizonte'),
 ('Carlos Pereira', 25, 'Curitiba');
 
+/*Insere informações/Registros para a tabela Cursos*/
 INSERT INTO CURSOS
 (nome_curso, carga_horaria)
 VALUES
@@ -41,6 +48,7 @@ VALUES
 ('Lógica de Programação', 60),
 ('Desenvolvimento Web', 80);
 
+/*Insere informações/Registros para a tabela Matricula*/
 INSERT INTO MATRICULA
 (aluno_id, curso_id, data_matricula)
 VALUES
@@ -49,36 +57,45 @@ VALUES
 (3, 1, '2024-04-05'),
 (4, 3, '2024-05-20');
 
+/*Seleciona nome e cidade dos Alunos*/
 SELECT nome, cidade
 FROM ALUNOS;
-
+ 
+/*Selecione cursos e carga horaria da tabela curso
+onde a carga horaria seja maior que 50 horas*/
 SELECT nome_curso, carga_horaria
 FROM CURSOS
 WHERE carga_horaria >= 50;
 
+/*Selecione nome e cidade dos alunos onde a cidade seja Curitiba*/
 SELECT nome, cidade
 FROM ALUNOS
 WHERE cidade = 'Curitiba';
 
+/*Selecione nome e idade dos alunos onde a idade seja menos de 22 anos*/
 SELECT nome, idade
 FROM ALUNOS
 WHERE idade <= 22;
 
+/*Selecione nome e curso dos Alunos*/
 SELECT ALUNOS.nome, CURSOS.nome_curso
 FROM ALUNOS
 INNER JOIN CURSOS
 ON ALUNOS.id = CURSOS.id;
 
+/*Seleciona nome e curso dos Alunos onde o curso seja Banco de Dados*/
 SELECT nome, nome_curso	
 FROM ALUNOS
 INNER JOIN CURSOS
 ON ALUNOS.id = CURSOS.id
 WHERE nome_curso = 'Banco de Dados';
 
+/*Selecione nome e carga horaria dos Cursos onde a carga horaria seja DIFERENTE (!) de 60 horas*/
 SELECT nome_curso, carga_horaria
 FROM CURSOS
-WHERE carga_horaria ;
+WHERE carga_horaria != 60;
 
+/*Selecione nome e cidade dos Alunos onde as cidades sejam São Paulo e Rio de Janeiro*/
 SELECT nome, cidade
 FROM ALUNOS
 WHERE cidade = 'São Paulo' OR cidade = 'Rio de Janeiro';
