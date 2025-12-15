@@ -40,7 +40,7 @@ VALUES
 ('Carlos Souza', '2000-10-12', 1),		/*Deletado na linha 65-67*/
 ('Mario Alves', '1997-07-02', 2),
 ('Bianca Flores', '1998-06-05', 1),
-('Val_Gonçalvez', '2002-05-28', 2);
+('Val Gonçalvez', '2002-05-28', 2);
 
 
 /*Insira informações na tabela Curso*/
@@ -73,3 +73,46 @@ CURSO.nome_curso
 FROM ALUNO
 INNER JOIN CURSO
 ON ALUNO.id_curso = CURSO.id_curso;
+
+CREATE TABLE PROFESSOR(
+	id_prof INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    curso_lecio VARCHAR(50) CHECK (curso_lecio IN ('TECNICO EM INFORMATICA', 'DESENVOLVIMENTO WEB'))
+);
+
+CREATE TABLE ATIVIDADE(
+	id_atv INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(50),
+    data_entrega DATE,
+    nota INT,
+    id_prof INT,
+    FOREIGN KEY (id_prof)
+		references PROFESSOR(id_prof)
+);
+
+INSERT INTO PROFESSOR
+(nome, email, curso_lecio)
+VALUES
+('Mario Alberto', 'mario@gmail.com', 'TECNICO EM INFORMATICA'),
+('Roberta Mirian', 'roberta@gmail.com', 'DESENVOLVIMENTO WEB'),
+('Laura Kelly', 'laura@gmail.com', 'DESENVOLVIMENTO WEB'),
+('José Chico', 'jose@gmail.com', 'TECNICO EM INFORMATICA'),
+('Helton Rodrigo', 'helton@gmail.com', 'DESENVOLVIMENTO WEB');
+
+INSERT INTO ATIVIDADE
+(titulo, data_entrega, nota, id_prof)
+VALUES
+('Banco de Dados', '2025-12-28', 8, 1),
+('HTML Básico', '2026-01-02', 7, 2),
+('Criando Site do Zero', '2026-03-15', 6, 3),
+('P.O.O', '2026-01-20', 9, 4),
+('Segurança de Dados', '2026-06-21', 8, 5);
+
+SELECT nome, curso_lecio
+FROM PROFESSOR;
+
+SELECT ALUNO.nome, ATIVIDADE.titulo
+FROM ALUNO
+INNER JOIN ATIVIDADE
+ON ALUNO.id_aluno = ATIVIDADE.id_atv;
