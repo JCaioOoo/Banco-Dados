@@ -109,10 +109,32 @@ VALUES
 ('P.O.O', '2026-01-20', 9, 4),
 ('Segurança de Dados', '2026-06-21', 8, 5);
 
+/*Seleciona Nome e Cursos Lecionados pelos Professores*/
 SELECT nome, curso_lecio
 FROM PROFESSOR;
 
+/*Selecione Nome dos Alunos e Nome das Atividades*/
 SELECT ALUNO.nome, ATIVIDADE.titulo
 FROM ALUNO
+INNER JOIN ATIVIDADE
+ON ALUNO.id_aluno = ATIVIDADE.id_atv;
+
+/*Selecione Nome dos Alunos, Nome e Cursos Lecionados dos Professores*/
+SELECT ALUNO.nome AS Alunos, PROFESSOR.nome AS Professores, PROFESSOR.curso_lecio AS Cursos
+FROM ALUNO
+INNER JOIN PROFESSOR
+ON ALUNO.id_aluno = PROFESSOR.id_prof;
+
+/*Selecione Nome e Valor dos Cursos, e Nome dos Professores*/
+SELECT CURSO.nome_curso AS Cursos, CURSO.valor_curso AS Valores, PROFESSOR.nome AS Professores
+FROM CURSO
+INNER JOIN PROFESSOR
+ON CURSO.id_curso = PROFESSOR.id_prof;
+
+/*Selecione Nome dos Alunos, Nome dos Professores, Nome e Nota das Atividades*/
+SELECT ALUNO.nome, PROFESSOR.nome, ATIVIDADE.titulo, ATIVIDADE.nota
+FROM ALUNO
+INNER JOIN PROFESSOR
+ON ALUNO.id_aluno = PROFESSOR.id_prof
 INNER JOIN ATIVIDADE
 ON ALUNO.id_aluno = ATIVIDADE.id_atv;
