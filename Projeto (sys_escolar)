@@ -132,7 +132,7 @@ INNER JOIN PROFESSOR
 ON CURSO.id_curso = PROFESSOR.id_prof;
 
 /*Selecione Nome dos Alunos, Nome dos Professores, Nome e Nota das Atividades*/
-SELECT ALUNO.nome, PROFESSOR.nome, ATIVIDADE.titulo, ATIVIDADE.nota
+SELECT ALUNO.nome AS Alunos, PROFESSOR.nome AS Professores, ATIVIDADE.titulo AS Atividades, ATIVIDADE.nota AS Nota
 FROM ALUNO
 INNER JOIN PROFESSOR
 ON ALUNO.id_aluno = PROFESSOR.id_prof
